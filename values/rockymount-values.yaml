@@ -1,0 +1,63 @@
+# Rocky Mount Location - CUPS Configuration
+# Deployment: kubectl apply -f rockymount-deployment.yaml
+# OR via Helm: helm install branch-cups-rockymount ./charts/branch-cups -f values/rockymount-values.yaml
+
+image:
+  repository: chmeehan/branch-cups-server
+  tag: "v1.1"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: LoadBalancer
+  port: 631
+  targetPort: 631
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# Rocky Mount Network Configuration
+# - Local subnet: 192.168.200.0/24
+# - Regional network: 10.200.0.0/16
+# - Allowed printers/devices only
+cupsConfig: |
+  LogLevel warn
+  MaxLogSize 0
+  Listen localhost:631
+  Listen /run/cups/cups.sock
+  Browsing No
+  BrowseLocalProtocols none
+  DefaultAuthType Basic
+  WebInterface Yes
+  
+  # Rocky Mount Location Access Control
+  <Location />
+    Order allow,deny
+    Allow localhost
+    Allow 127.0.0.1
+    Allow 192.168.200.0/24
+    Allow 10.200.0.0/16
+  </Location>
+  
+  <Location /admin>
+    Order allow,deny
+    Allow localhost
+    Allow 127.0.0.1
+    Allow 192.168.200.0/24
+    Allow 10.200.0.0/16
+  </Location>
+  
+  <Location /admin/conf>
+    Require admin @SYSTEM
+    Order allow,deny
+    Allow localhost
+    Allow 127.0.0.1
+    Allow 192.168.200.0/24
+    Allow 10.200.0.0/16
+  </Location>

@@ -1,0 +1,13 @@
+apiVersion: v2
+name: branch-cups
+description: CUPS server for branch printing with location-specific configurations
+type: application
+version: 1.0.0
+appVersion: "1.1"
+keywords:
+  - cups
+  - printing
+  - branch
+maintainers:
+  - name: Stauffer Team
+    email: team@stauffer.local
