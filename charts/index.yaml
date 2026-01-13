@@ -1,3 +1,21 @@
 apiVersion: v1
-entries: {}
-generated: "2026-01-13T02:41:23.2408563-05:00"
+entries:
+  branch-cups:
+  - apiVersion: v2
+    appVersion: "1.1"
+    created: "2026-01-13T02:47:24.9802582-05:00"
+    description: CUPS server for branch printing with location-specific configurations
+    digest: f9bf1ce0a0d19ceabca6d9ddd4619aa04d433a4594b6bee5433e70407945020f
+    keywords:
+    - cups
+    - printing
+    - branch
+    maintainers:
+    - email: team@stauffer.local
+      name: Stauffer Team
+    name: branch-cups
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/meehanc-ssg/branch-cups-helm/main/charts/branch-cups-1.0.0.tgz
+    version: 1.0.0
+generated: "2026-01-13T02:47:24.9647232-05:00"
